@@ -1,0 +1,21 @@
+*** Settings ***
+Library           RequestsLibrary
+Resource          apikeyword.txt
+Resource          guikeyword.txt
+Library           Collections
+Library           String
+Library           ExcelLibrary
+Library           AppiumLibrary
+
+*** Variables ***
+${guiurl}         http://www.baidu.com
+${apiurl}         http://localhost:8000
+
+*** Test Cases ***
+apiDemo
+    [Tags]    api
+    ${deluri}    创建用户    ${apiurl}    /users/    {"username": "admin1","email": "admin@qq.com","groups": []}    admin1    201
+    log    ${deluri}
+    删除用户    ${apiurl}    ${deluri}    \    204
+
+
